@@ -1,0 +1,13 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer {
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(25, 25, 170, 0.63);
+}
