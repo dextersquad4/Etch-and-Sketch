@@ -4,25 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Etch-and-Sketch</title>
+    <link href="./style.css" rel="stylesheet">
 </head>
 <body>
-    <div class="header"> 
-        Etch-and-Sketch
-    </div>
-    <div class="body">
-        <nav class="grid">
+    <h1 class="header">Etch-and-Sketch</h1>
+    <div class="content">
+        <nav class="grid" id="grid">
         </nav>
         <nav class="selectors">
             <div class="color-pick">
-                <p>Select a color:</p>
-                <input type="color" id="colorpicker" class="color-wheel">
+                <p style="color: white; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-size: 24px; margin: 0;">Select a color:</p>
+                <input type="color" id="colorPicker" class="color-wheel">
             </div>
-            <button class="rnd-colors">Click HERE to have a random order of colors</button>
+            <button class="rnd-colors" id="rnd-colors">Click HERE to have a random order of colors</button>
             <div class="adj-size">
-                <p>Adjust the size of the grid:</p>
-                <input type="number" placeholder="16">
+                <p class="adj-size-txt">Adjust the size of the grid:</p>
+                <input type="number" placeholder="16" id = gridInput>
             </div>
         </nav>
     </div>
+    <div class="footer">
+        Made by Dean Liang.
+    </div>
+    <script>
+        let DEAFAULT_COLOR = '#000000';
+        let currentcolor = DEAFAULT_COLOR;
+        let sideLength = 16;
+        let ERASER = '#FFFFFF';
+        let currentMode = 'color';
+
+        let grid = document.getElementById('grid');
+        const colorSelector = document.getElementById('colorPicker');
+        const rndColor = document.getElementById('rnd-colors');
+        const gridInput = document.getElementById('gridInput');
+        const selectors = document.getElementsByClassName('selectors');
+        const meat = document.querySelector('content')
+
+        colorSelector.oninput = (e) => {
+            updateColor(e.target.value);
+            currentMode = 'color';
+        };
+
+        gridInput.onchange = (e) => {
+            grid.innerHTML = '';
+            if (e.target.value <= 100){
+                updateGrid(e.target.value);
+                buildGrid(sideLength);
+            }
+        }
+        rndColor.onclick = () => currentMode = 'rainbow';
+
+
+        let mouseDown = false;
+        grid.onmousedown = () => mouseDown = true;
+        grid.onmouseup = () => mouseDown = false;
+
+        function updateColor(newColor) {
+            currentcolor = newColor;
+        }
+
+        function updateGrid(newSideLength) {
+            sideLength = newSideLength;
+        }
+
+        function buildGrid(sideLength) {
+            grid.style.gridTemplateColumns = `repeat(${sideLength}, 1fr)`;
+            grid.style.gridTemplateRows = `repeat(${sideLength}, 1fr)`;
+            for(i = 0; i < sideLength ** 2; i ++) {
+                let box = document.createElement('div');
+                box.classList.add('grid-box');
+                box.addEventListener('mouseover', changeColor);
+                box.addEventListener('mousedown', changeColor);
+                grid.append(box);
+            }
+        }
+
+        function changeColor(e){
+            if (e.type === 'mouseover' && !mouseDown) return;
+            if (currentMode == 'color') {
+                e.target.style.backgroundColor = currentcolor;
+            } else if (currentMode == 'rainbow') {
+                const randomR = Math.floor(Math.random()* 255 + 1)
+                const randomG = Math.floor(Math.random()* 255 + 1)
+                const randomB = Math.floor(Math.random()* 255 + 1)
+                e.target.style.backgroundColor = `rgb(${randomR}, ${randomG}, ${randomB})`
+            }
+
+        }
+
+
+        buildGrid(sideLength);
+    </script>
 </body>
 </html>
