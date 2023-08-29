@@ -1,13 +1,83 @@
+.header, .footer, .rnd-colors, .adj-size {
+    color: white;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
 body {
+    margin: 0;
     display: flex;
     flex-direction: column;
+    background-color: gray;
+    min-height: 100vh;
+
+}
+
+.header {
+    margin: 240px 0 64px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-shadow: 2px 2px 8px black;
+    font-size: 54px;
+}
+
+
+.content {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+
+}
+
+.selectors {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+
+.color-pick {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     align-items: center;
 }
 
+.color-wheel {
+    border-radius: 8px;
+    width: 140px;
+    height: 72px;
+}
+.rnd-colors {
+    background-color: rgb(102, 100, 100);
+    border-radius: 4px;
+    border: 4px solid black;
+}
+
+.rnd-colors:hover {
+    background-color: rgb(65, 63, 63);
+}
+
+
+.adj-size-txt {
+    font-size: 24px;
+}
+
+.grid {
+    display: grid;
+}
+
+
+
+
+
+
 .footer {
-    justify-self: center;
     display: flex;
-    align-items: center;
     justify-content: center;
-    background-color: rgba(25, 25, 170, 0.63);
+    align-items: center;
+    font-size: 18px;
+    height: 72px;
+    background-color: rgb(10, 10, 163);
+    justify-self: flex-end;
 }
