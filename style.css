@@ -26,6 +26,7 @@ body {
 .content {
     display: flex;
     justify-content: center;
+    gap: 48px;
     flex: 1;
 
 }
@@ -59,18 +60,31 @@ body {
 }
 
 
+.adj-size {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .adj-size-txt {
     font-size: 24px;
 }
 
 .grid {
     display: grid;
+    height: 345px;
+    width: 345px;
+    grid-template-columns: repeat(16, 1fr);
+    grid-template-rows: repeat(16,1fr);
 }
 
-
-
-
-
+.grid-box {
+    background-color: white;
+    height: 100%;
+    width: 100%;
+    z-index: 100;
+}
 
 .footer {
     display: flex;
